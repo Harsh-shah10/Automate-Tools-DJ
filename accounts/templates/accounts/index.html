@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automate Tools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .tool-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        /* Adjust login and username styles */
+        .username {
+            font-weight: bold;
+            margin-bottom: 10px;
+            margin-top: 10px; /* Add margin-top for spacing */
+        }
+        .logout-button {
+            background-color: #f44336; /* Change logout button color */
+        }
+        .logout-button:hover {
+            background-color: #d32f2f; /* Change logout button hover color */
+        }
+        .login-register-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        /* Adjust spacing between login and register buttons */
+        .button.login {
+            margin-right: 10px;
+        }
+        /* Responsive adjustments */
+        @media screen and (max-width: 600px) {
+            .button {
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Automate Tools</h1>
+        
+        <!-- Check if user is logged in -->
+        {% if request.user.is_authenticated %}
+        <div class="username">Logged in as: {{ request.user.username }}</div>
+        <div class="button-container">
+            <a href="{% url 'logout' %}" class="button logout-button">Logout</a>
+        </div>
+
+        <div class="tool-container">
+            <div class="button-container">
+                <a href="{% url 'import_data' %}" class="button">Import Data from CSV</a>
+            </div>
+            <p class="tool-description">Use this tool to import data from a CSV file into your system.</p>
+        </div>
+        <div class="tool-container">
+            <div class="button-container">
+                <a href="{% url 'export_data' %}" class="button">Export Data to CSV</a>
+            </div>
+            <p class="tool-description">Use this tool to export data from your system to a CSV file.</p>
+        </div>
+        <!-- Add more tool containers for additional tools -->
+        {% else %}
+        <!-- If user is not logged in, show login and register buttons -->
+        <div class="login-register-container">
+            <a href="{% url 'login' %}" class="button login">Login</a>
+            <a href="{% url 'signup' %}" class="button">Register</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

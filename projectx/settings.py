@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'dataentry',
     'uploads',
     'django_celery_results',
+    'accounts',
 ]
 
 MIDDLEWARE = [
