@@ -1,0 +1,18 @@
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <p style="padding: 15px; border: 1px solid transparent; border-radius: 4px; margin-bottom: 20px;
+        {% if message.tags == 'success' %}
+            color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;
+        {% elif message.tags == 'info' %}
+            color: #31708f; background-color: #d9edf7; border-color: #bce8f1;
+        {% elif message.tags == 'warning' %}
+            color: #8a6d3b; background-color: #fcf8e3; border-color: #faebcc;
+        {% elif message.tags == 'error' %}
+            color: #a94442; background-color: #f2dede; border-color: #ebccd1;
+        {% endif %}">
+        {{ message }}
+    </p>
+    {% endfor %}
+</div>
+{% endif %}
