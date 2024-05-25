@@ -4,11 +4,13 @@ from uploads.models import Upload
 from django.conf import settings
 from django.core.management import call_command
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Import cekrey tasks 
 from .tasks import import_data_task, send_email, export_data_task
 
 # Create your views here.
+@login_required
 def import_data(request):
     if request.method == 'POST':
         csv_file_path = request.FILES.get('csv_file')
@@ -39,7 +41,7 @@ def import_data(request):
     
     return render(request, 'dataentry/import_data.html',context)
 
-
+@login_required
 def export_data(request):
     if request.method == 'POST':
         table_name = request.POST.get('table')
@@ -59,11 +61,11 @@ def export_data(request):
     
     return render(request, 'dataentry/export_data.html',context)
 
-
+@login_required
 def homepage(request):
     return render(request, 'index.html')
 
-
+@login_required
 def celery_test(request):
     # test_celery.delay()
     send_email.delay('Test Subject', 'Jay shree ram !!', settings.DEFAULT_TO_EMAIL) # Send Test mail
