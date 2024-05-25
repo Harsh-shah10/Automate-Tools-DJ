@@ -11,6 +11,9 @@ def index(request):
 
 # signup page
 def user_signup(request):
+    if request.user.is_authenticated:
+        return redirect('home')  
+     
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -22,6 +25,9 @@ def user_signup(request):
 
 # login page
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('home')  
+     
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
